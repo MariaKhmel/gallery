@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-        <Toaster />
+        <Toaster position="top-right" />
       </div>
       <SearchBar onSubmit={onSubmit} />
     </>

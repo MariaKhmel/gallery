@@ -1,7 +1,7 @@
-const ImageCard = () => {
+const ImageCard = ({ image }) => {
   return (
     <>
-      <div>ImageCard</div>
+      <div>{image.alt_description}</div>
     </>
   );
 };

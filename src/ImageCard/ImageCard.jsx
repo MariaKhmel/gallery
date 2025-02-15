@@ -1,7 +1,7 @@
-const ImageCard = ({ image }) => {
+const ImageCard = ({ urls, description }) => {
   return (
     <>
-      <div>{image.alt_description}</div>
+      <img src={urls.small} alt={description} />
     </>
   );
 };

@@ -15,8 +15,23 @@ function App() {
   const [images, setImages] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
 
-  const onSubmit = async (query) => {
+  const onSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const data = await fetchImages(query, page);
+      setTotalPages(data["total_pages"]);
+      setImages(data.results);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onLoadMore = async () => {
+    setPage((prevPage) => (prevPage += 1));
     try {
       setIsLoading(true);
       const data = await fetchImages(query, page);
@@ -32,10 +47,10 @@ function App() {
   return (
     <>
       <Toaster position="top-right" />
-      <SearchBar onSubmit={onSubmit} />
+      <SearchBar onSubmit={onSubmit} setQuery={setQuery} query={query} />
       {isLoading && <Loader />}
       {images.length > 0 && <ImageGallery images={images} />}
-      {page < totalPages && <LoadMoreBtn />}
+      {page < totalPages && <LoadMoreBtn onLoadMore={onLoadMore} />}
     </>
   );
 }

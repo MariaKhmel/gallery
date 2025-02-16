@@ -1,11 +1,8 @@
 import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
 
-const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
-
+const SearchBar = ({ onSubmit, query, setQuery }) => {
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -16,7 +13,7 @@ const SearchBar = ({ onSubmit }) => {
       toast.error("Please enter the searchword");
       return;
     }
-    onSubmit(query);
+    onSubmit(setQuery(e.target.value));
     setQuery("");
   };
 

@@ -1,7 +1,9 @@
+import { ClipLoader } from "react-spinners";
+
 const Loader = () => {
   return (
     <>
-      <div>Loader</div>
+      <ClipLoader />
     </>
   );
 };

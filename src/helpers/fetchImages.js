@@ -3,7 +3,7 @@ const baseUrl = `https://api.unsplash.com/search/photos?client_id=${client_id}`;
 
 
 const fetchImages = async (query, page) => {
-  const res = await fetch(`${baseUrl}&page=${page}&per_page=20&query=${query}`);
+  const res = await fetch(`${baseUrl}&page=${page}&per_page=10&query=${query}`);
   return await res.json();
 }
 

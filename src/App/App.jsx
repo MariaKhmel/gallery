@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import fetchImages from "../helpers/fetchImages";
-
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
@@ -17,7 +16,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
 
-  const onSubmit = async () => {
+  const onSubmit = async (inputValue) => {
+    setQuery(inputValue);
     try {
       setIsLoading(true);
       const data = await fetchImages(query, page);
@@ -35,8 +35,7 @@ function App() {
     try {
       setIsLoading(true);
       const data = await fetchImages(query, page);
-      setTotalPages(data["total_pages"]);
-      setImages(data.results);
+      setImages((prevImages) => [...prevImages, ...data.results]);
     } catch (error) {
       console.log(error);
     } finally {

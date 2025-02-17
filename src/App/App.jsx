@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import fetchImages from "../helpers/fetchImages";
@@ -14,42 +14,47 @@ function App() {
   const [images, setImages] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
 
-  const onSubmit = async (inputValue) => {
+  useEffect(() => {
+    if (query.trim() === "") {
+      return;
+    }
+    const handleSearch = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchImages(query, page);
+        setTotalPages(data["total_pages"]);
+        setImages(data.results);
+      } catch (error) {
+        console.log(error);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    handleSearch();
+  }, [page, query]);
+
+  const handleSearchSumbit = (inputValue) => {
     setPage(1);
     setQuery(inputValue);
-    try {
-      setIsLoading(true);
-      const data = await fetchImages(inputValue, page);
-      setTotalPages(data["total_pages"]);
-      setImages(data.results);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
   };
-
-  const onLoadMore = async () => {
-    try {
-      setIsLoading(true);
-      const nextPage = page + 1;
-      const data = await fetchImages(query, nextPage);
-      setImages((prevImages) => [...prevImages, ...data.results]);
-      setPage((prevPage) => prevPage + 1);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onLoadMore = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   return (
     <div className={css.container}>
       <Toaster position="top-right" />
-      <SearchBar onSubmit={onSubmit} setQuery={setQuery} query={query} />
+      <SearchBar
+        onSubmit={handleSearchSumbit}
+        setQuery={setQuery}
+        query={query}
+      />
       {isLoading && <Loader />}
+      {error && <p>Something went wrong...</p>}
       {images.length > 0 && (
         <>
           <ImageGallery images={images} />

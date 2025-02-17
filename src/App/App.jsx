@@ -26,7 +26,9 @@ function App() {
         setIsLoading(true);
         const data = await fetchImages(query, page);
         setTotalPages(data["total_pages"]);
-        setImages(data.results);
+        page === 1
+          ? setImages(data.results)
+          : setImages((prevImages) => [...prevImages, ...data.results]);
       } catch (error) {
         console.log(error);
         setError(true);

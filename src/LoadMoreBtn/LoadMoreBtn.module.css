@@ -1,7 +1,9 @@
 .loadMoreBtn {
   display: block;
   padding: 10px 16px;
-  margin: 20px auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
 
   font-size: 16px;
   font-weight: 600;

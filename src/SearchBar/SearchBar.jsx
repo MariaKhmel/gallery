@@ -4,12 +4,13 @@ import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ onSubmit }) => {
   const handleSubmit = (e) => {
+    const inputValue = e.target.elements.input.value;
     e.preventDefault();
-    if (e.target.elements.input.value.trim() === "") {
+    if (inputValue.trim() === "") {
       toast.error("Please enter the searchword");
       return;
     }
-    onSubmit(e.target.elements.input.value);
+    onSubmit(inputValue);
   };
 
   return (

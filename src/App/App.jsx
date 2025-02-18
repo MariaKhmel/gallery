@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import fetchImages from "../helpers/fetchImages";
+
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import Loader from "../Loader/Loader";
+import ImageModal from "../ImageModal/ImageModal";
 
 import css from "./App.module.css";
-import Loader from "../Loader/Loader";
 
 function App() {
   const [page, setPage] = useState(1);
@@ -16,6 +18,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
+  const [modal, setModal] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -47,6 +51,9 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   return (
     <div className={css.container}>
       <Toaster position="top-right" />
@@ -62,6 +69,13 @@ function App() {
           <ImageGallery images={images} />
           <LoadMoreBtn onLoadMore={onLoadMore} disabled={page === totalPages} />
         </>
+      )}
+      {modal && (
+        <ImageModal
+          modal={modal}
+          isModalOpen={isModalOpen}
+          setModalOpen={setModalOpen}
+        />
       )}
     </div>
   );

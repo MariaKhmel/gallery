@@ -1,4 +1,4 @@
-const ImageModal = ({ modal, isModalOpen, setModalOpen }) => {
+const ImageModal = ({ modal, setModalOpen }) => {
   return (
     <>
       <div>ImageModal</div>

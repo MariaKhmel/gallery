@@ -51,7 +51,10 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = () => setModalOpen(true);
+  const openModal = (picture) => {
+    console.log(picture);
+    setModalOpen(true);
+  };
   const closeModal = () => setModalOpen(false);
 
   return (
@@ -66,7 +69,7 @@ function App() {
       {error && <p>Something went wrong...</p>}
       {images.length > 0 && (
         <>
-          <ImageGallery images={images} />
+          <ImageGallery images={images} openModal={openModal} />
           <LoadMoreBtn onLoadMore={onLoadMore} disabled={page === totalPages} />
         </>
       )}

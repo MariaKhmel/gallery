@@ -1,7 +1,11 @@
+import css from "./ImageModal.module.css";
+
 const ImageModal = ({ modal, setModalOpen }) => {
   return (
     <>
-      <div>ImageModal</div>
+      <div>
+        <div></div>
+      </div>
     </>
   );
 };

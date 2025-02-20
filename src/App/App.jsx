@@ -52,7 +52,8 @@ function App() {
   };
 
   const openModal = (picture) => {
-    setModalOpen(false);
+    console.log("c");
+    setModalOpen(true);
     setModal(picture);
   };
   const closeModal = () => setModal(null);
@@ -73,7 +74,7 @@ function App() {
           <LoadMoreBtn onLoadMore={onLoadMore} disabled={page === totalPages} />
         </>
       )}
-      {modal && <ImageModal modal={modal} setModalOpen={setModalOpen} />}
+      {isModalOpen && <ImageModal modal={modal} setModalOpen={setModalOpen} />}
     </div>
   );
 }

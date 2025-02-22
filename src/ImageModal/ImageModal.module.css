@@ -1,8 +1,18 @@
 .backdrop {
   position: fixed;
   top: 0;
-  left: : 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+
+  height: 80%;
+  width: 60%;
+  background-color: aliceblue;
 }

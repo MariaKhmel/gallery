@@ -52,7 +52,6 @@ function App() {
   };
 
   const openModal = (picture) => {
-    console.log("c");
     setModalOpen(true);
     setModal(picture);
   };

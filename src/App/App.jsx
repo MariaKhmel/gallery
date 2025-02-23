@@ -51,9 +51,9 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (picture) => {
+  const openModal = (data) => {
     setModalOpen(true);
-    setModal(picture);
+    setModal(data);
   };
   const closeModal = () => setModal(null);
 

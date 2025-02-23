@@ -8,7 +8,7 @@ const ImageGallery = ({ images, openModal }) => {
         <li key={image.id} className={css.card}>
           <ImageCard
             urls={image.urls}
-            alt={image.description}
+            alt={image.alt_description}
             openModal={openModal}
           />
         </li>

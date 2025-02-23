@@ -55,7 +55,7 @@ function App() {
     setModalOpen(true);
     setModal(data);
   };
-  const closeModal = () => setModal(null);
+  const closeModal = () => setModalOpen(false);
 
   return (
     <div className={css.container}>
@@ -73,7 +73,7 @@ function App() {
           <LoadMoreBtn onLoadMore={onLoadMore} disabled={page === totalPages} />
         </>
       )}
-      {isModalOpen && <ImageModal modal={modal} setModalOpen={setModalOpen} />}
+      {isModalOpen && <ImageModal modal={modal} closeModal={closeModal} />}
     </div>
   );
 }

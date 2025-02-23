@@ -29,6 +29,7 @@ function App() {
       try {
         setIsLoading(true);
         const data = await fetchImages(query, page);
+        console.log(data);
         setTotalPages(data["total_pages"]);
         page === 1
           ? setImages(data.results)
@@ -55,7 +56,10 @@ function App() {
     setModalOpen(true);
     setModal(data);
   };
-  const closeModal = () => setModalOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    setModal(null);
+  };
 
   return (
     <div className={css.container}>
@@ -67,6 +71,7 @@ function App() {
       />
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
+      {query && images.length === 0 && <p>No images found</p>}
       {images.length > 0 && (
         <>
           <ImageGallery images={images} openModal={openModal} />

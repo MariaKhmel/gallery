@@ -71,7 +71,9 @@ function App() {
       />
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
-      {query && images.length === 0 && <p>No images found</p>}
+      {query && images.length === 0 && (
+        <p className={css.test}>No images found</p>
+      )}
       {images.length > 0 && (
         <>
           <ImageGallery images={images} openModal={openModal} />
